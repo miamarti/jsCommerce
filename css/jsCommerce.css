@@ -1,0 +1,7 @@
+[rel="product"] {
+    width: 250px;
+    height: 350px;
+    border: 1px solid #999;
+    margin: 20px;
+    display: inline-block;
+}
