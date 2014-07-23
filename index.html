@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>jsCommerce</title>
+    <link href="assets/css/console.css" rel="stylesheet">
+      <link href="assets/css/jsCommerce.css" rel="stylesheet">
+    
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link href="http://getbootstrap.com/examples/dashboard/dashboard.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">jsCommerce</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li class="active"><a href="index.html">Example</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">jsCommerce</h1>
+
+            <div rel="product" data-itemId="150" data-itemDescription="Example Product 1" data-itemAmount="150.30" data-itemQuantity="1"></div>
+            <div rel="product" data-itemId="155" data-itemDescription="Example Product 2" data-itemAmount="75" data-itemQuantity="1"></div>
+			<hr />
+            <div rel="totalCart"></div>
+
+			<div id="consoleArea" class="consoleArea"></div>
+        </div>
+      </div>
+    </div>
+
+	<script type="text/javascript" src="assets/js/console.js"></script>
+	<script type="text/javascript" src="assets/js/jsCommerce.js"></script>
+  </body>
+</html>
