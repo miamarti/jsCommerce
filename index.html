@@ -56,5 +56,18 @@
 
 	<script type="text/javascript" src="js/console.js"></script>
 	<script type="text/javascript" src="js/jsCommerce.js"></script>
+	
+	<script>
+		jsCommerce.setCallback(function(){
+		    console.clear();
+		    this.ShoppingCart.list.forEach(function(iten){
+		        console.log(iten);
+		    });
+		});
+		
+		jsCommerce.run(function(){
+		    console.log('jCommerce Start!');
+		});
+	</script>
   </body>
 </html>
