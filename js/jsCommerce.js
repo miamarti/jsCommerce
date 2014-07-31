@@ -25,24 +25,39 @@ var jsCommerce = (function(document, window){
     core.ShoppingCart.__proto__.setProduct = function(product){
         var increase = false;
         this.list.forEach(function(iten){
-            if(iten.itemid == product.itemid){
+            if(iten.itemid == product.dataset.itemid){
                 increase = true;
-                product.itemquantity = eval(product.itemquantity) + 1;
+                product.dataset.itemquantity = eval(product.dataset.itemquantity) + 1;
             }
         });
         if(!increase){
-            this.list.push(product);
+            this.list.push(product.dataset);
         }
+        core.getCallback();
+    };
+    core.ShoppingCart.__proto__.deleteProduct = function(product){
+        var countRef = 0;
+        core.ShoppingCart.list.forEach(function(iten){
+            if(iten.itemid == product.dataset.itemid){
+                core.ShoppingCart.list.splice((countRef),1);
+            }
+            countRef++;
+        });
         core.getCallback();
     };
     core.ShoppingCart.__proto__.removeProduct = function(product){
         var countRef = 0;
         core.ShoppingCart.list.forEach(function(iten){
             if(iten.itemid == product.dataset.itemid){
-                core.ShoppingCart.list.splice((countRef),1);  
+                if(iten.itemquantity > 1){
+                    iten.itemquantity--;
+                } else {
+                    core.ShoppingCart.list.splice((countRef),1);     
+                }
             }
             countRef++;
         });
+        core.getCallback();
     };
     core.ShoppingCart.__proto__.getTotal = function(){
         core.ShoppingCart.total = 0;
@@ -63,11 +78,24 @@ var jsCommerce = (function(document, window){
     };
     core.__proto__.load = function(){
         var _this = this;
-        [].map.call(document.querySelectorAll('[rel="product"]'), function(product){
+        [].map.call(document.querySelectorAll('[rel="addProduct"]'), function(product){
             product.addEventListener('click', function(){
-                _this.ShoppingCart.setProduct(this.dataset);
+                _this.ShoppingCart.setProduct(this.parentNode);
             }, false);
         });
+        
+        [].map.call(document.querySelectorAll('[rel="removeProduct"]'), function(obj){
+            obj.addEventListener('click', function(){
+                _this.ShoppingCart.removeProduct(this.parentNode);
+            }, false);
+        });
+        
+        [].map.call(document.querySelectorAll('[rel="deleteProduct"]'), function(obj){
+            obj.addEventListener('click', function(){
+                _this.ShoppingCart.deleteProduct(this.parentNode);
+            }, false);
+        });
+        
         return this;
     };
     return core.load();
