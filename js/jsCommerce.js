@@ -30,6 +30,7 @@ var jsCommerce = (function(document, window){
             }
         });
         if(!increase){
+            product.dataset.itemquantity = 1;
             this.list.push(product.dataset);
         }
         core.getCallback();
