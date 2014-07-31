@@ -9,5 +9,8 @@ var console = {
         } catch(e){
             nConsole.log(e);
         }
-	}
+	},
+    clear : function() {
+        document.querySelector('.consoleArea').innerHTML = '';
+    }
 };
