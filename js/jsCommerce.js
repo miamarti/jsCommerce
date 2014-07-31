@@ -18,7 +18,6 @@ var jsCommerce = (function(document, window){
             message : undefined
         },
         callback : function(){
-            console.log(core.ShoppingCart);
         }
     };
     
@@ -72,12 +71,18 @@ var jsCommerce = (function(document, window){
         return core.ShoppingCart.total;
     };
     
+    core.__proto__.setCallback = function(callback){
+        core.callback = callback;
+    };
+    
     core.__proto__.getCallback = function(){
         core.ShoppingCart.getTotal();
         core.callback();
     };
-    core.__proto__.load = function(){
+    
+    core.__proto__.run = function(callback){
         var _this = this;
+        
         [].map.call(document.querySelectorAll('[rel="addProduct"]'), function(product){
             product.addEventListener('click', function(){
                 _this.ShoppingCart.setProduct(this.parentNode);
@@ -96,7 +101,8 @@ var jsCommerce = (function(document, window){
             }, false);
         });
         
+        (callback != undefined)?callback():'';
         return this;
     };
-    return core.load();
+    return core;
 })(document, window);
