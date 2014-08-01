@@ -33,6 +33,11 @@ var jsCommerce = (function(document, window){
             product.dataset.itemquantity = 1;
             this.list.push(product.dataset);
         }
+        product.parentNode.parentNode.classList.add('panel');
+        product.parentNode.parentNode.classList.add('panel-primary');
+        product.parentNode.parentNode.querySelectorAll('.panel-heading .glyphicon-shopping-cart')[0].classList.remove('hide');
+        product.parentNode.parentNode.querySelectorAll('.panel-heading .glyphicon-shopping-cart')[0].innerHTML = product.dataset.itemquantity;
+        product.parentNode.parentNode.querySelectorAll('.panel-heading .cost')[0].innerHTML =  (eval(product.dataset.itemamount) * eval(product.dataset.itemquantity)).formatMoney(2,",",".");
         core.getCallback();
     };
     core.ShoppingCart.__proto__.deleteProduct = function(product){
@@ -40,6 +45,10 @@ var jsCommerce = (function(document, window){
         core.ShoppingCart.list.forEach(function(iten){
             if(iten.itemid == product.dataset.itemid){
                 core.ShoppingCart.list.splice((countRef),1);
+                product.parentNode.parentNode.classList.remove('panel');
+                product.parentNode.parentNode.classList.remove('panel-primary');
+                product.parentNode.parentNode.querySelectorAll('.panel-heading span')[0].classList.add('hide');
+                product.parentNode.parentNode.querySelectorAll('.panel-heading .cost')[0].innerHTML = "";
             }
             countRef++;
         });
@@ -51,8 +60,14 @@ var jsCommerce = (function(document, window){
             if(iten.itemid == product.dataset.itemid){
                 if(iten.itemquantity > 1){
                     iten.itemquantity--;
+                    product.parentNode.parentNode.querySelectorAll('.panel-heading .glyphicon-shopping-cart')[0].innerHTML = product.dataset.itemquantity;
+                    product.parentNode.parentNode.querySelectorAll('.panel-heading .cost')[0].innerHTML =  (eval(product.dataset.itemamount) * eval(product.dataset.itemquantity)).formatMoney(2,",",".");
                 } else {
-                    core.ShoppingCart.list.splice((countRef),1);     
+                    core.ShoppingCart.list.splice((countRef),1);
+                    product.parentNode.parentNode.classList.remove('panel');
+                    product.parentNode.parentNode.classList.remove('panel-primary');
+                    product.parentNode.parentNode.querySelectorAll('.panel-heading span')[0].classList.add('hide');
+                    product.parentNode.parentNode.querySelectorAll('.panel-heading .cost')[0].innerHTML = "";
                 }
             }
             countRef++;
