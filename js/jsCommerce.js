@@ -64,45 +64,38 @@ var jsCommerce = (function(document, window){
         this.list.forEach(function(product){
             core.ShoppingCart.total += eval(product.itemamount) * eval(product.itemquantity);
         });
-        
         [].map.call(document.querySelectorAll('[rel="totalCart"]'), function(obj){
             obj.innerHTML = core.ShoppingCart.total.formatMoney(2,",",".");
         });
-        
         return core.ShoppingCart.total;
-    };
-    
+    }; 
     core.__proto__.setCallback = function(callback){
         core.callback = callback;
     };
-    
     core.__proto__.getCallback = function(){
         core.ShoppingCart.getTotal();
         core.callback();
     };
-    
     core.__proto__.run = function(callback){
         var _this = this;
-        
         [].map.call(document.querySelectorAll('[rel="addProduct"]'), function(product){
             product.addEventListener('click', function(){
                 _this.ShoppingCart.setProduct(this.parentNode);
             }, false);
         });
-        
         [].map.call(document.querySelectorAll('[rel="removeProduct"]'), function(obj){
             obj.addEventListener('click', function(){
                 _this.ShoppingCart.removeProduct(this.parentNode);
             }, false);
         });
-        
         [].map.call(document.querySelectorAll('[rel="deleteProduct"]'), function(obj){
             obj.addEventListener('click', function(){
                 _this.ShoppingCart.deleteProduct(this.parentNode);
             }, false);
         });
-        
-        (callback != undefined)?callback():'';
+        if(callback != undefined){
+            callback();
+        }
         return this;
     };
     return core;
